@@ -117,6 +117,11 @@ Plugin 'scrooloose/nerdcommenter'
 " vim markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+" markdown实时预览
+" Plugin 'suan/vim-instant-markdown'
+Plugin 'iamcco/markdown-preview.vim'
+" Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+"******************************************************************************
 " 语法检查
 Plugin 'w0rp/ale'
 " Plugin 'scrooloose/syntastic'
@@ -271,6 +276,12 @@ let g:ale_linters = {
 let g:vim_markdown_folding_disabled = 1
 " 
 let g:vim_markdown_folding_style_pythonic = 1
+"******************************************************************************
+" markdown-preview
+let g:mkdp_auto_start = 1
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
+let g:mkdp_command_for_global = 0
 "******************************************************************************
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
