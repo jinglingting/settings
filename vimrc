@@ -1,3 +1,7 @@
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+
 " 定义快捷键前缀, 即<Leader>
 let mapleader=";"
 
@@ -84,6 +88,12 @@ Plugin 'scrooloose/nerdtree'
 " python自动缩进
 " Plugin 'vim-scripts/indentpython.vim'
 Plugin 'ervandew/supertab'
+
+" deoplete补全框架
+"Plugin 'Shougo/deoplete.nvim'
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'roxma/vim-hug-neovim-rpc'
+"Plugin 'deoplete-plugins/deoplete-jedi'
 " python自动补全
 Plugin 'davidhalter/jedi-vim'
 " Plugin 'derekwyatt/vim-fswitch'
@@ -109,18 +119,18 @@ Plugin 'scrooloose/nerdcommenter'
 " Plugin 'gcmt/wildfire.vim'
 " Plugin 'sjl/gundo.vim'
 " Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'suan/vim-instant-markdown'
 " pep8代码风格检查
 " Plugin 'nvie/vim-flake8'
 " python全能插件
 " Plugin 'python-mode/python-mode'
+" 补全括号
+Plugin 'jiangmiao/auto-pairs'
 " vim markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " markdown实时预览
+Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " Plugin 'suan/vim-instant-markdown'
-Plugin 'iamcco/markdown-preview.vim'
-" Plugin 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 "******************************************************************************
 " 语法检查
 Plugin 'w0rp/ale'
@@ -140,6 +150,7 @@ filetype plugin indent on
 " 设置背景色主题
 let g:solarized_termcolors=256
 set background=light
+" set background=dark
 colorscheme solarized
 
 "******************************************************************************
@@ -235,8 +246,14 @@ nnoremap <Leader><Leader>k :VBGkill<CR>
 "supertab配置******************************************************************
 let g:SuperTabDefaultCompletionType = "context"
 
+"补全配置**********************************************************************
+"let g:deoplete#enable_at_startup = 1
+"
 "jedi配置**********************************************************************
+" 不显示补全的preview窗口
+set completeopt-=preview
 let g:jedi#auto_initialization = 1
+let g:jedi#smart_auto_mappings = 1
 inoremap <Tab> g:jedi#completions_command()
 nnoremap <Leader>gc g:jedi#completions_command()
 nnoremap <Leader>gd g:jedi#goto_command()
@@ -274,11 +291,12 @@ let g:ale_linters = {
 " vim markdown
 " 关闭插件自带的折叠配置
 let g:vim_markdown_folding_disabled = 1
-" 
+ 
 let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_conceal = 0
 "******************************************************************************
 " markdown-preview
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 let g:mkdp_refresh_slow = 0
 let g:mkdp_command_for_global = 0
@@ -324,7 +342,8 @@ set tabstop=4
 set shiftwidth=4
 " 让 vim 把连续数量的空格视为一个制表符
 set softtabstop=4
-
+"autocmd BufNewFile,BufRead *.md set noexpandtab tabstop=2 shiftwidth=2
+auto filetype html,htmldjango set tabstop=2 shiftwidth=2 softtabstop=2
 " 基于缩进或语法进行代码折叠
 set foldmethod=indent
 
@@ -334,5 +353,5 @@ set foldmethod=indent
 set nofoldenable
 
 " better indentation
-vnoremap < <gv 
+vnoremap < <gv
 vnoremap > >gv
